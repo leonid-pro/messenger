@@ -3,23 +3,10 @@
 	<head>
 		<title>Chat</title>
 		<meta charset="utf-8" />
-		<style type="text/css">
-			body {
-				margin: 0;
-				padding: 0;
-				font-family: Arial, sans-serif;
-				font-size: 13px;
-			}
-			#wrap {
-				width: 1000px;
-				margin: 20px auto;
-			}
-			
-			.message-item {
-				margin: 20px 0;
-			}
-			
-		</style>
+		<link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="/static/messenger/css/common.css" rel="stylesheet">
+		<script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/static/jquery/js/jquery-1.9.1.min.js"></script>
 	</head>
 	<body>
 		<div id="wrap">		
@@ -27,8 +14,8 @@
 			<div id="send-message">			
 				<form method="post" action="/chat/put-message">
 					Message:<br />
-					<textarea name="message"></textarea><br />
-					<input type="submit" value="Send" />
+					<textarea name="message" class="input-xlarge" rows="4"></textarea><br />
+					<input type="submit" value="Send message" class="btn" />
 				</form>
 			</div>
 			

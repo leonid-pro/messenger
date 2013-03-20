@@ -1,5 +1,4 @@
-from bottle import Bottle, route, run, template, post, request
-#import sqlite3
+from bottle import Bottle, route, run, template, post, request, static_file
 
 app = Bottle()
 
@@ -16,7 +15,10 @@ def get_template(name):
 	f = open('templates/' + name + '.tpl', 'r')
 	data = f.read()
 	f.close()
-	return data	
+	return data
 	
-
+@app.route('/static/<filepath:path>')
+def server_static(filepath):
+    return static_file(filepath, root='./static')
+	
 run(app, host='localhost', port=10100, debug=True)
