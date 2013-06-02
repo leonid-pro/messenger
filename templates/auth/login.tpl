@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Chat</title>
+		<title>Login - Chat</title>
 		<meta charset="utf-8" />
 		<link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
 		<link href="/static/messenger/css/common.css" rel="stylesheet">
@@ -10,16 +10,20 @@
 		<script type="text/javascript" src="/static/messenger/js/common.js"></script>
 	</head>
 	<body>
-		<div id="wrap">
-			<div id="chat">			
-				<h1>Chat</h1>
-				<form method="post" action="/chat">
-					Message:<br />
-					<textarea name="message" class="input-xlarge" rows="4"></textarea><br />
-					<input type="submit" value="Send message" class="btn" />
+		<div id="wrap">		
+			<div id="sign-in">			
+				<form method="post" action="/auth/login">
+					<h1>Sign in</h1>
+					Login:<br /><input type="text" name="login"/><br />
+					Password:<br /><input type="password" name="password"/><br />
+					<input type="submit" value="Login" class="btn" />
 				</form>
-			</div>
-			<div id="messages">
+				<div class="alert hide"></div>
+				<div class="help">
+					<ul>
+						<li><a href="/auth/register">Register</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</body>
