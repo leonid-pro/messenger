@@ -9,6 +9,22 @@
 		<script type="text/javascript" src="/static/jquery/js/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" src="/static/jquery/js/jquery.cookie.js"></script>
 		<script type="text/javascript" src="/static/messenger/js/common.js"></script>
+		<script type="text/javascript">
+			setTimeout(updateChat, 1000);
+
+			function updateChat() {
+    			$.post(
+					'/chat/list', 
+					{
+					},
+					function (data) {
+						update_messages(data.messages);
+					},
+					'json'
+				);
+    			setTimeout(updateChat, 1000);
+			}		
+		</script>
 	</head>
 	<body>
 		<div id="wrap2">
