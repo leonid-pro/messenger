@@ -12,3 +12,32 @@ body {
 .message-item {
 	margin: 20px 0;
 }
+
+.navblock{
+	background-color: #1b1b1b;
+	padding: 5px;
+	height: 30px;
+	color: #ffffff;
+}
+
+#wrap2 {
+	width: 100%;
+	margin: 0;
+}
+
+.title-text{
+	vertical-align: middle;
+	font-weight: bold;
+	font-size: 20px;
+	padding: 5px;
+	float: left;
+	position: relative;
+}
+
+.user-block{
+	vertical-align: middle;
+	font-size: 20px;
+	padding: 5px;
+	float: right;
+	position: relative;
+}

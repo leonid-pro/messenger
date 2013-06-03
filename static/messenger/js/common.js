@@ -9,6 +9,8 @@ $(document).ready(function() {
 		},
 		'json'
 	);
+
+	$('#welcome-message').html("Welcome, "+$.cookie("username")+"!");
 	
 	$('#chat form').on('submit', function() {
 		

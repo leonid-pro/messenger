@@ -58,9 +58,10 @@ class Auth_model:
                 cur = self.db.cursor()
                 cur.execute('CREATE TABLE IF NOT EXISTS auth (user_id INTEGER PRIMARY KEY, hash TEXT)')
         
-        def set_code(self, user_id):
+        def set_code(self, user_id,user_name):
 			hash = "%032x" % random.getrandbits(128) 
 			response.set_cookie("auth_code", hash, Path='/')
+			response.set_cookie("username", user_name, Path='/')
 			cur = self.db.cursor()
 			cur.execute('INSERT OR REPLACE INTO auth (user_id, hash) VALUES(?, ?)', (user_id, hash))
 			self.db.commit()
@@ -115,6 +116,8 @@ user_model = User_model(db);
 auth_model = Auth_model(db);
 message_model =Message_model(db);
 
+@app.get('')
+@app.get('/')
 @app.get('/chat')
 def chat():
 	user_id = auth_model.get_user_id()
@@ -147,7 +150,7 @@ def logout():
 def login():
 	user = user_model.get(request.forms.get('login'),request.forms.get('password')) 
 	if user:
-		auth_model.set_code(user[0])
+		auth_model.set_code(user[0],request.forms.get('login'))
 		return {'result' : 'ok', 'message' : 'Congratulations! You have successfully log in.<br>To chat on go to <a href="/chat">Chat Page</a>'}
 	else:
 		return {'result' : 'error', 'message' : 'Invalid login or password'}
