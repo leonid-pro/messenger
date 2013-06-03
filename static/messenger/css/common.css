@@ -13,6 +13,17 @@ body {
 	margin: 20px 0;
 }
 
+#messages {
+	width:100%;
+	border-bottom: 1px #1f1f1f solid;
+	padding: 5px;
+}
+
+#chat {
+	width:100%;
+	border: 1px #1f1f1f solid;
+}
+
 .navblock{
 	background-color: #1b1b1b;
 	padding: 5px;

@@ -15,6 +15,8 @@ $(document).ready(function() {
 	$('#chat form').on('submit', function() {
 		
 		var message = $('#chat textarea[name=message]').val();
+
+		$('#chat textarea[name=message]').val('');
 	
 		clear_alert();
 				
