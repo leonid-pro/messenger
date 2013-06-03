@@ -109,7 +109,7 @@ class Message_model:
 
         def get_list(self):
                 cur = self.db.cursor()
-                cur.execute('SELECT m.id, u.login, m.data, m.date FROM messages m, users u WHERE u.id=m.from_id ORDER BY m.id DESC LIMIT 30')
+                cur.execute('SELECT m.id, u.login, m.data, m.date FROM messages m, users u WHERE u.id=m.from_id ORDER BY m.id ASC LIMIT 30')
                 return cur.fetchall()       
 
 user_model = User_model(db);

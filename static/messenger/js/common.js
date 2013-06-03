@@ -206,7 +206,7 @@ function update_messages(data) {
 	$('#messages').html('');
 	var item;
 	for (i in data) {
-		item = '<div class="message" id="message-' + data[i][0] + '">' + data[i][1] + ' ('+data[i][3]+'): ' + data[i][2] + '</div>';
+		item = '<div class="message" id="message-' + data[i][0] + '">' + ' ('+data[i][3]+') ' + data[i][1] +': ' + data[i][2] + '</div>';
 		$('#messages').append(item);	
 	}
 }
