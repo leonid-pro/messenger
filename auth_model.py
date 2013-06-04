@@ -1,3 +1,6 @@
+# -*- coding: utf_8 -*-
+
+import random
 import sqlite3
 from bottle import Bottle, route, run, template, post, request, response, static_file, redirect
 class Auth_model:

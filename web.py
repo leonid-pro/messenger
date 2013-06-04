@@ -1,7 +1,6 @@
 # -*- coding: utf_8 -*-
 
 import sqlite3
-import random
 from user_model import User_model
 from auth_model import Auth_model
 from message_model import Message_model
@@ -12,7 +11,7 @@ db = sqlite3.connect('data_new.db')
 
 user_model = User_model(db);
 auth_model = Auth_model(db);
-message_model =Message_model(db);
+message_model = Message_model(db);
 
 @app.get('')
 @app.get('/')
