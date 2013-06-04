@@ -2,115 +2,13 @@
 
 import sqlite3
 import random
+from user_model import User_model
+from auth_model import Auth_model
+from message_model import Message_model
 from bottle import Bottle, route, run, template, post, request, response, static_file, redirect
 
 app = Bottle()
 db = sqlite3.connect('data_new.db')
-
-class User_model:
-        def __init__(self, db):
-                self.db = db
-                self.__create_tables()
-
-        def __create_tables(self):
-                cur = self.db.cursor()
-                cur.execute('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, login TEXT, email TEXT, password TEXT)')
-
-        def insert(self, login, email, password):
-                cur = self.db.cursor()
-                try:
-                    cur.execute('INSERT INTO users(login, email, password) VALUES(?, ?, ?)', (login, email, password))
-                    self.db.commit()
-                except sqlite3.Error, e:
-                	print "Error %s:" % e.args[0]
-                	return False
-                return True
-
-        def get(self, login, password = ''):
-                cur = self.db.cursor()
-                try:
-                	if (password):
-                		cur.execute('SELECT id, login, email, password FROM users WHERE login=? AND password=?', (login, password))
-                	else:
-                		cur.execute('SELECT id, login, email, password FROM users WHERE login=?', (login, ))
-                	return cur.fetchone()
-                except sqlite3.Error, e:
-                	print "Error %s:" % e.args[0]
-                	return False
-               
-        def get_id(self, login):
-                cur = self.db.cursor()
-                cur.execute('SELECT id FROM users WHERE login=?', login)
-                row = cur.fetch()
-                return row['id']
-
-        def get_list(self):
-                cur = self.db.cursor()
-                cur.execute('SELECT id, login FROM users')
-                return cur.fetchall()
-
-class Auth_model:
-        def __init__(self, db):
-                self.db = db
-                self.__create_tables()
-      
-        def __create_tables(self):
-                cur = self.db.cursor()
-                cur.execute('CREATE TABLE IF NOT EXISTS auth (user_id INTEGER PRIMARY KEY, hash TEXT)')
-        
-        def set_code(self, user_id,user_name):
-			hash = "%032x" % random.getrandbits(128) 
-			response.set_cookie("auth_code", hash, Path='/')
-			response.set_cookie("username", user_name, Path='/')
-			cur = self.db.cursor()
-			cur.execute('INSERT OR REPLACE INTO auth (user_id, hash) VALUES(?, ?)', (user_id, hash))
-			self.db.commit()
-        
-        def delete_code(self):
-			code = request.get_cookie("auth_code")
-			cur = self.db.cursor()
-			cur.execute('DELETE FROM auth WHERE hash=?', (code, ))
-
-        
-        def get_user_id(self):
-                
-			code = request.get_cookie("auth_code")
-			
-			if code:                
-				cur = self.db.cursor()
-				cur.execute('SELECT user_id FROM auth WHERE hash=?', (code, ))
-				data = cur.fetchone()
-
-				if data:
-					return data[0]
-				else:
-					return False
-			else:
-				return False
-
-class Message_model:
-        def __init__(self, db):
-                self.db = db
-                self.__create_tables()
-
-        def __create_tables(self):
-                cur = self.db.cursor()
-                cur.execute('CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY, from_id INT, data TEXT, date TEXT)')
-
-        def insert(self, message, from_id):
-                cur = self.db.cursor()
-                cur.execute('INSERT INTO messages(data, from_id, date) VALUES(?, ?, datetime("now"))', (message, from_id))
-                self.db.commit()
-
-        def get(self, from_id, to_id, limit):
-                cur = self.db.cursor()
-                cur.execute('SELECT id, from_id, to_id FROM messages WHERE login=? AND password=?', (login, password))
-                return cur.fetch()
-
-        def get_list(self):
-                cur = self.db.cursor()
-                cur.execute('SELECT m.id, u.login, m.data, m.date FROM messages m, users u WHERE u.id=m.from_id ORDER BY m.id ASC LIMIT 30')
-                return cur.fetchall()       
 
 user_model = User_model(db);
 auth_model = Auth_model(db);
