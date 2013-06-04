@@ -36,11 +36,11 @@
 					</div>
 				</div>		
 			<div id="chat">	
-				<div class="fetched-content">	
+				<div class="fetched-content">
+					<div id="online-users">Online:
+					</div>	
 					<div id="messages">
-					</div>
-					<div id="online-users">
-					</div>
+					</div>					
 				</div>
 				<div class="controls-content">		
 					<form method="post" action="/chat">
