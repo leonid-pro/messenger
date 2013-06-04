@@ -19,6 +19,7 @@
 					},
 					function (data) {
 						update_messages(data.messages);
+						update_online_users(null);
 					},
 					'json'
 				);
@@ -34,14 +35,19 @@
 						<a href="/auth/logout" id="logoutbtn" class="btn" >Logout</a>
 					</div>
 				</div>		
-			<div id="chat">		
-				<div id="messages">
-				</div>			
-				<form method="post" action="/chat">
-					Message:<br />
-					<textarea name="message" class="input-xlarge" rows="4"></textarea><br />
-					<input type="submit" value="Send message" class="btn" />
-				</form>
+			<div id="chat">	
+				<div class="fetched-content">	
+					<div id="messages">
+					</div>
+					<div id="online-users">
+					</div>
+				</div>
+				<div class="controls-content">		
+					<form method="post" action="/chat">
+						<textarea name="message" class="message-input" rows="1" wrap="off"></textarea>
+						<input type="submit" value="Send message" class="btn" id="btn" />
+					</form>
+				</div>
 			</div>
 		</div>
 	</body>

@@ -6,6 +6,7 @@ $(document).ready(function() {
 		},
 		function (data) {
 			update_messages(data.messages);
+			update_online_users(null);
 		},
 		'json'
 	);
@@ -208,11 +209,26 @@ function check_password(val, val_repeat) {
 }
 
 function update_messages(data) {
-
+	if (data ==null) {
+		return false;
+	};
 	$('#messages').html('');
 	var item;
 	for (i in data) {
 		item = '<div class="message" id="message-' + data[i][0] + '">' + ' ('+data[i][3]+') ' + data[i][1] +': ' + data[i][2] + '</div>';
 		$('#messages').append(item);	
+	}
+}
+
+function update_online_users(data) {
+	if (data ==null) {
+		return false;
+	};
+	$('#online-users').html('');
+	$('#online-users').append("Online: "+data.length+" users");
+	var item;
+	for (i in data) {
+		item = '<div class="message" id="message-' + data[i][0] + '">'+data[i][1]+'</div>';
+		$('#online-users').append(item);	
 	}
 }
