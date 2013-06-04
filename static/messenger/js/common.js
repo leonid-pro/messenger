@@ -32,18 +32,7 @@ $(document).ready(function() {
 				{
 				'message' : message
 			},
-			function (data) {
-					$.post(
-						'/chat/list', 
-						{
-						},
-						function (data) {
-							update_messages(data.messages);
-						},
-						'json'
-					);
-									
-			},
+			updateChat(),
 			'json'
 		);
 		
@@ -225,10 +214,32 @@ function update_online_users(data) {
 		return false;
 	};
 	$('#online-users').html('');
-	$('#online-users').append("Online: "+data.length+" users");
+	$('#online-users').append("Online: "+data["users"].length+" users");
 	var item;
-	for (i in data) {
-		item = '<div class="message" id="message-' + data[i][0] + '">'+data[i][1]+'</div>';
+	for (i in data["users"]) {
+		item = '<div class="message" ">'+data["users"][i]+'</div>';
 		$('#online-users').append(item);	
 	}
 }
+
+function updateChat() {
+    			$.post(
+					'/chat/list', 
+					{
+					},
+					function (data) {
+						update_messages(data.messages);
+						
+					},
+					'json'
+				);
+				$.post(
+					'/chat/online', 
+					{
+					},
+					function (data) {
+						update_online_users(data);
+					},
+					'json'
+				);
+}	

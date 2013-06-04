@@ -10,21 +10,11 @@
 		<script type="text/javascript" src="/static/jquery/js/jquery.cookie.js"></script>
 		<script type="text/javascript" src="/static/messenger/js/common.js"></script>
 		<script type="text/javascript">
-			setTimeout(updateChat, 1000);
-
-			function updateChat() {
-    			$.post(
-					'/chat/list', 
-					{
-					},
-					function (data) {
-						update_messages(data.messages);
-						update_online_users(null);
-					},
-					'json'
-				);
-    			setTimeout(updateChat, 1000);
-			}		
+			setTimeout(updateChatTimer, 1000);
+			function updateChatTimer() {
+				updateChat()
+				setTimeout(updateChatTimer, 1000);
+			}	
 		</script>
 	</head>
 	<body>
