@@ -16,6 +16,10 @@ $(document).ready(function() {
 		
 		var message = $('#chat textarea[name=message]').val();
 
+		if (message == '') {
+			return false;
+		};
+
 		$('#chat textarea[name=message]').val('');
 	
 		clear_alert();
