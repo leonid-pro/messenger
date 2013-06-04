@@ -34,8 +34,14 @@ def chat_post():
 @app.get('/chat/list')
 @app.post('/chat/list')
 def chat_list():
-	messages = message_model.get_list()
+	messages = message_model.get_list(auth_model.get_user_id())
 	return {'result' : 'ok', 'messages' : messages}
+
+@app.get('/chat/online')
+@app.post('/chat/online')
+def chat_online():
+	users = message_model.get_online()
+	return {'result' : 'ok', 'users' : users}
 
 
 @app.route('/auth/logout')
