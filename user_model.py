@@ -1,3 +1,5 @@
+# -*- coding: utf_8 -*-
+
 import sqlite3
 from bottle import Bottle, route, run, template, post, request, response, static_file, redirect
 class User_model:
